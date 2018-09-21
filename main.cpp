@@ -2,9 +2,21 @@
 #include <fstream>
 #include <iomanip>
 #include <cstdlib>
+#include <algorithm>
 #include <random>
 
 using namespace std;
+
+void sort(double array[], int size) {
+    double temp;
+    for(int i=0;i<size;i++) {
+        if(array[i]>array[i+1]) {
+            temp = array[i];
+            array[i] = array[i+1];
+            array[i+1] = temp;
+        }
+    }
+}
 
 int main() {
     ofstream fout;
@@ -16,6 +28,7 @@ int main() {
     double high = 0;
     double low = 100;
     double median = 0;
+    double ascNum[numList];
 
     fout.open("Reading.txt");
     if(fout.is_open()){
@@ -30,12 +43,13 @@ int main() {
     if(fin.is_open()) {
         istringstream strLine;
         string line;
-
+        int count = 0;
         while (getline(fin, line)) {
             strLine.clear();
             strLine.str(line);
             strLine >> lineNum;
             strLine >> num;
+
             ave += num;
             if (num > high) {
                 high = num;
@@ -43,17 +57,23 @@ int main() {
             if (num < low) {
                 low = num;
             }
-            if (lineNum == (numList / 2)) {
-                median = num;
-            }
+            ascNum[count] = num;
+            count++;
         }
         ave = ave/lineNum;
         fin.close();
     }
-    cout << "Ther are " << lineNum << " readings in the file" << endl;
-    cout << "The average rading is " << fixed << setprecision(3) << ave << endl;
+    sort(ascNum, numList);
+    if(numList%2==0) {
+        median = (ascNum[numList/2] + ascNum[numList/2+1]) / 2;
+    } else {
+        median = ascNum[numList/2];
+    }
+
+    cout << "There are " << lineNum << " readings in the file" << endl;
+    cout << "The average reading is " << fixed << setprecision(3) << ave << endl;
     cout << "The highest reading is " << fixed << setprecision(3) << high << endl;
-    cout << "The lowest reaindg is " << fixed << setprecision(3) << low << endl;
+    cout << "The lowest reading is " << fixed << setprecision(3) << low << endl;
     cout << "The median reading is " << fixed << setprecision(3) << median << endl;
 
     return 0;

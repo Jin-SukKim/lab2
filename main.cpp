@@ -10,12 +10,12 @@ int main() {
     ofstream fout;
     int numList = (rand() % 513) + 512;
     double ranNum;
-    int lineNum;
+    int lineNum = 0;
     double num;
     double ave = 0;
     double high = 0;
     double low = 100;
-    double median;
+    double median = 0;
 
     fout.open("Reading.txt");
     if(fout.is_open()){
@@ -27,7 +27,7 @@ int main() {
     }
     ifstream fin;
     fin.open("Reading.txt");
-    if(fin.is_opend()) {
+    if(fin.is_open()) {
         istringstream strLine;
         string line;
 
@@ -47,8 +47,14 @@ int main() {
                 median = num;
             }
         }
+        ave = ave/lineNum;
         fin.close();
     }
+    cout << "Ther are " << lineNum << " readings in the file" << endl;
+    cout << "The average rading is " << fixed << setprecision(3) << ave << endl;
+    cout << "The highest reading is " << fixed << setprecision(3) << high << endl;
+    cout << "The lowest reaindg is " << fixed << setprecision(3) << low << endl;
+    cout << "The median reading is " << fixed << setprecision(3) << median << endl;
 
     return 0;
 }

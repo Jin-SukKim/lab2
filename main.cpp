@@ -67,6 +67,6 @@ int main() {
     cout << "The highest reading is " << fixed << setprecision(3) << high << endl;
     cout << "The lowest reading is " << fixed << setprecision(3) << low << endl;
     cout << "The median reading is " << fixed << setprecision(3) << median << endl;
-    cout << ascNum[0] << " " << ascNum[numList-1];
+
     return 0;
 }

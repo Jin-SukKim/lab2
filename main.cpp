@@ -3,8 +3,7 @@
 #include <iomanip>
 #include <cstdlib>
 #include <algorithm>
-#include <random>
-#include <vector>
+
 using namespace std;
 bool comp(double a, double b) {
     return a < b;
@@ -56,7 +55,7 @@ int main() {
         fin.close();
     }
 
-    std::sort(ascNum, ascNum+numList, comp);
+    sort(ascNum, ascNum+numList, comp);
     if(numList%2==0) {
         median = (ascNum[numList/2] + ascNum[numList/2+1]) / 2;
     } else {
@@ -68,6 +67,6 @@ int main() {
     cout << "The highest reading is " << fixed << setprecision(3) << high << endl;
     cout << "The lowest reading is " << fixed << setprecision(3) << low << endl;
     cout << "The median reading is " << fixed << setprecision(3) << median << endl;
-    
+    cout << ascNum[0] << " " << ascNum[numList-1];
     return 0;
 }

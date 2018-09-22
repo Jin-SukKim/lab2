@@ -4,18 +4,10 @@
 #include <cstdlib>
 #include <algorithm>
 #include <random>
-
+#include <vector>
 using namespace std;
-
-void sort(double array[], int size) {
-    double temp;
-    for(int i=0;i<size;i++) {
-        if(array[i]>array[i+1]) {
-            temp = array[i];
-            array[i] = array[i+1];
-            array[i+1] = temp;
-        }
-    }
+bool comp(double a, double b) {
+    return a < b;
 }
 
 int main() {
@@ -63,18 +55,19 @@ int main() {
         ave = ave/lineNum;
         fin.close();
     }
-    sort(ascNum, numList);
+
+    std::sort(ascNum, ascNum+numList, comp);
     if(numList%2==0) {
         median = (ascNum[numList/2] + ascNum[numList/2+1]) / 2;
     } else {
         median = ascNum[numList/2];
     }
 
-    cout << "There are " << lineNum << " readings in the file" << endl;
+    cout << "There are " << lineNum+1 << " readings in the file" << endl;
     cout << "The average reading is " << fixed << setprecision(3) << ave << endl;
     cout << "The highest reading is " << fixed << setprecision(3) << high << endl;
     cout << "The lowest reading is " << fixed << setprecision(3) << low << endl;
     cout << "The median reading is " << fixed << setprecision(3) << median << endl;
-
+    
     return 0;
 }
